@@ -56,3 +56,88 @@ contract gate3{
       console.log("Yes i am here!");
   }
 }
+
+//------------------------------------------------------------------------------------------
+// GeteKeeper_Two Notes
+
+
+contract For_GateKeeperTwo{
+    function check()public view returns(uint64){
+        return type(uint64).max;
+    }
+
+    function maxBytes8()public view returns(bytes8){
+        return bytes8(type(uint64).max);
+    }
+
+    function uint64Tobytes8(uint64 _value) public view returns(bytes8){
+        return bytes8(_value);
+    }
+
+    function hashCreater() public view returns(uint64 z) {
+        z = uint64(bytes8(keccak256(abi.encodePacked(msg.sender))));
+    }
+
+    function xorPerform(uint64 _first, uint64 _second) public view returns(uint64 z){
+        z = _first ^ _second;
+    }
+
+    function uint64Tobytes(uint64 _v) public view returns(bytes8 z){
+        z = bytes8(_v);
+    }
+
+    function gate3Check(bytes8 _gateKey) public view returns(bool){
+        require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == type(uint64).max);
+        return true;
+
+    } 
+
+}
+
+contract testing{
+    uint64  public a;
+    uint64 public b;
+    uint64 public c;
+    function see(bytes8 _gateKey) public view{
+        require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == type(uint64).max);
+        console.log("Pass");
+    }
+
+    function generate() public {
+        a = uint64(bytes8(keccak256(abi.encodePacked(msg.sender))));
+        b = type(uint64).max;
+        c = a ^ b;
+        console.log(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))));
+        console.log(type(uint64).max);
+    }
+
+    function xorPerform() public view returns(uint64 z){
+        z = a ^ b;
+    }
+    function Three() public view returns(uint64 z){
+        z = uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ type(uint64).max;
+    }
+
+    function Four() public view returns(bytes8 z){
+        z = bytes8(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ type(uint64).max);
+    }
+}
+
+contract Solution_2{
+    GatekeeperTwo gate;
+    bytes8 public _gateKey;
+    constructor(address _cA){
+        gate = GatekeeperTwo(_cA);
+        _gateKey = bytes8(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ type(uint64).max);
+        // console.log(uint64(_gateKey));
+        gate.enter(_gateKey);
+        // console.log(uint64(bytes8(keccak256(abi.encodePacked(address(this))))) ^ uint64(_gateKey) == type(uint64).max);
+    }
+}
+
+contract checking1{
+    address public x;
+    constructor(){
+        x  = address(this);
+    }
+}
