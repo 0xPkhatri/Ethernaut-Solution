@@ -13,11 +13,11 @@ contract Solution_2{
 }
 
 
-/**/
+/*
 3 ^ 5 = 6     //( ^  = XOR )
 To get the second number (5) from the first number (3) and the result (6) of an XOR operation, you can perform another XOR operation with the first number. This is because XOR is a reversible operation, meaning that if you apply it twice with the same operand, you get back the original operand.
 
 So, to get the second number (5) from the first number (3) and the result (6), you can perform the following XOR operation:
 
 6 ^ 3 = 5
-/**/
+*/
