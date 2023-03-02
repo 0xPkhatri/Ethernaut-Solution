@@ -141,3 +141,21 @@ contract checking1{
         x  = address(this);
     }
 }
+
+
+// Bytes32 to string and string to bytes32 converter contract
+
+contract bytes32String{
+
+    function stringToBytes32(string memory _x) external pure returns(bytes32) {
+        return bytes32(bytes(_x));
+    }
+
+    function bytes32ToString(bytes32 _bytes32) public pure returns (string memory) {
+        bytes memory bytesArray = new bytes(32);
+        for (uint256 i = 0; i < 32; i++) {
+            bytesArray[i] = _bytes32[i];
+        }
+        return string(bytesArray);
+    }
+}
