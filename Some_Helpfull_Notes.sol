@@ -159,3 +159,12 @@ contract bytes32String{
         return string(bytesArray);
     }
 }
+
+// How is the address of an Ethereum contract computed?
+contract checks{
+  function get_address(address sender) external pure returns(address){
+  // nonce0= address(uint160(uint256(keccak256(abi.encodePacked(bytes1(0xd6), bytes1(0x94), sender, bytes1(0x80))))));
+    address nonce1= address(uint160(uint256(keccak256(abi.encodePacked(bytes1(0xd6), bytes1(0x94), sender, bytes1(0x02))))));
+    return nonce1;
+}
+}
